@@ -11,6 +11,3 @@ parameters:
         - _ide_helper.php
     level: 9
     inferPrivatePropertyTypeFromConstructor: true
-    ignoreErrors:
-        - identifier: missingType.generics
-        - '#PHPDoc tag @var#'

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -9,7 +11,7 @@ return [
     |
     | The default filename.
     |
-    */
+     */
 
     'filename' => '_ide_helper.php',
 
@@ -20,7 +22,7 @@ return [
     |
     | The default filename for the models helper file.
     |
-    */
+     */
 
     'models_filename' => '_ide_helper_models.php',
 
@@ -33,7 +35,7 @@ return [
     | files in it, should you need additional files for your project; e.g.
     | `.phpstorm.meta.php/laravel_ide_Helper.php'.
     |
-    */
+     */
     'meta_filename' => '.phpstorm.meta.php',
 
     /*
@@ -43,7 +45,7 @@ return [
     |
     | Set to true to generate commonly used Fluent methods.
     |
-    */
+     */
 
     'include_fluent' => false,
 
@@ -57,7 +59,7 @@ return [
     |
     | Deprecated for Laravel 8 or latest.
     |
-    */
+     */
 
     'include_factory_builders' => false,
 
@@ -68,7 +70,7 @@ return [
     |
     | Set to false to disable write magic methods of model.
     |
-    */
+     */
 
     'write_model_magic_where' => true,
 
@@ -79,7 +81,7 @@ return [
     |
     | Set to false to disable write external Eloquent builder methods.
     |
-    */
+     */
 
     'write_model_external_builder_methods' => true,
 
@@ -90,7 +92,7 @@ return [
     |
     | Set to false to disable writing of relation count properties to model DocBlocks.
     |
-    */
+     */
 
     'write_model_relation_count_properties' => true,
 
@@ -105,7 +107,7 @@ return [
     |
     | Please be aware that this setting changes a file within the /vendor directory.
     |
-    */
+     */
 
     'write_eloquent_model_mixins' => false,
 
@@ -117,13 +119,13 @@ return [
     | Include helper files. By default not included, but can be toggled with the
     | -- helpers (-H) option. Extra helper files can be included.
     |
-    */
+     */
 
     'include_helpers' => false,
 
     'helper_files' => [
-        base_path().'/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
-        base_path().'/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php',
+        base_path() . '/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
+        base_path() . '/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php',
     ],
 
     /*
@@ -137,7 +139,7 @@ return [
     | glob patterns are supported to easier reach models in sub-directories,
     | e.g. `app/Services/* /Models` (without the space).
     |
-    */
+     */
 
     'model_locations' => [
         'app',
@@ -150,7 +152,7 @@ return [
     |
     | Define which models should be ignored.
     |
-    */
+     */
 
     'ignored_models' => [
         // App\MyModel::class,
@@ -165,7 +167,7 @@ return [
     |
     | Hooks should implement Barryvdh\LaravelIdeHelper\Contracts\ModelHookInterface.
     |
-    */
+     */
 
     'model_hooks' => [
         // App\Support\IdeHelper\MyModelHook::class
@@ -178,7 +180,7 @@ return [
     |
     | These implementations are not really extended, but called with magic functions.
     |
-    */
+     */
 
     'extra' => [
         'Eloquent' => ['Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'],
@@ -195,7 +197,7 @@ return [
     | These interfaces will be replaced with the implementing class. Some interfaces
     | are detected by the helpers, others can be listed below.
     |
-    */
+     */
 
     'interfaces' => [
         // App\MyInterface::class => App\MyImplementation::class,
@@ -234,7 +236,7 @@ return [
     |
     | Cast the given "real type" to the given "type".
     |
-    */
+     */
     'type_overrides' => [
         'integer' => 'int',
         'boolean' => 'bool',
@@ -248,7 +250,7 @@ return [
     | Include DocBlocks from classes to allow additional code inspection for
     | magic methods and properties.
     |
-    */
+     */
     'include_class_docblocks' => false,
 
     /*
@@ -260,7 +262,7 @@ return [
     | even if the class exists in the same namespace
     | or there is an import (use className) of the class.
     |
-    */
+     */
     'force_fqn' => false,
 
     /*
@@ -271,7 +273,7 @@ return [
     | Use generics syntax within DocBlocks,
     | e.g. `Collection<User>` instead of `Collection|User[]`.
     |
-    */
+     */
     'use_generics_annotations' => true,
 
     /*
@@ -283,7 +285,7 @@ return [
     | is the relationship method name. The value of the array is the fully-qualified
     | class name of the relationship, e.g. `'relationName' => RelationShipClass::class`.
     |
-    */
+     */
     'additional_relation_types' => [],
 
     /*
@@ -297,7 +299,7 @@ return [
     | or 'morphTo').
     | e.g. `'relationName' => 'many'`.
     |
-    */
+     */
     'additional_relation_return_types' => [],
 
     /*
@@ -319,7 +321,7 @@ return [
     |  * @property int $not_null_column_with_no_foreign_key_constraint
     |  * @property-read BelongsToVariation $notNullColumnWithNoForeignKeyConstraint
     |
-    */
+     */
 
     'enforce_nullable_relationships' => true,
 
@@ -330,7 +332,7 @@ return [
     |
     | The specified commands should run after migrations are finished running.
     |
-    */
+     */
     'post_migrate' => [
         // 'ide-helper:models --nowrite',
     ],
@@ -343,7 +345,7 @@ return [
     | Define which traits should be considered capable of adding Macro.
     | You can add any custom trait that behaves like the original Laravel one.
     |
-    */
+     */
     'macroable_traits' => [
         // Filament\Support\Concerns\Macroable::class,
         // Spatie\Macroable\Macroable::class,
