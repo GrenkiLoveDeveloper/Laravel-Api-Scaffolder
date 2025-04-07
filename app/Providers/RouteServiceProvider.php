@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider {
-    public const string HOME = '/';
+    public static string $home = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -25,6 +25,15 @@ class RouteServiceProvider extends ServiceProvider {
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
         });
+    }
+
+    /**
+     * Привязка роута HOME к env.
+     *
+     * @return string
+     */
+    protected static function getHome(): string {
+        return env('APP_HOME', '/');
     }
 
     /**
