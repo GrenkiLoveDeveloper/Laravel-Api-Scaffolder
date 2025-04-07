@@ -1,4 +1,4 @@
-FROM api-armgp-app:local
+FROM lara-app:local
 
 USER $user
 
