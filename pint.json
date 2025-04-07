@@ -16,7 +16,15 @@
         "concat_space": {
             "spacing": "one"
         },
+        "method_argument_space": {
+            "keep_multiple_spaces_after_comma": false,
+            "on_multiline": "ignore"
+        },
+        "no_superfluous_phpdoc_tags": false,
+        "no_unreachable_default_argument_value": false,
         "not_operator_with_successor_space": false,
+        "phpdoc_summary": true,
+        "spaces_inside_parentheses": { "space": "none" },
         "curly_braces_position": {
             "functions_opening_brace": "same_line",
             "classes_opening_brace": "same_line"
@@ -31,7 +39,6 @@
         },
         "fully_qualified_strict_types": {
             "phpdoc_tags": [
-                "param",
                 "phpstan-param",
                 "phpstan-property",
                 "phpstan-property-read",

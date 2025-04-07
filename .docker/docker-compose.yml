@@ -61,6 +61,19 @@ services:
         php-fpm
       "
 
+  lara-scheduler:
+    build:
+      context: php/cron/
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ../:/var/www/api
+    networks:
+      - lara-network
+    restart: always
+    depends_on:
+      - app
+
   redis:
     image: 'redis:7.4.2-alpine'
     container_name: lara-redis-server

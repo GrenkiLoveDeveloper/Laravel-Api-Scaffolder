@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Console\CronSchedule as ScheduleHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\JsonResponse;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,4 +17,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {})
-    ->withExceptions(function (Exceptions $exceptions): void {})->create();
+    ->withSchedule(new ScheduleHandler)
+    ->withExceptions(function (Exceptions $exceptions): void {
+
+        $exceptions->renderable(function (ModelNotFoundException $e, Request $request) {
+
+            // Если запрос ожидает ответ в формате JSON
+            if ($request->wantsJson()) {
+                return response()->json(
+                    [
+                        'error' => __('messages.model_not_found', ['model' => $e->getModel()]),
+                    ],
+                    JsonResponse::HTTP_NOT_FOUND
+                );
+            }
+        });
+    })->create();

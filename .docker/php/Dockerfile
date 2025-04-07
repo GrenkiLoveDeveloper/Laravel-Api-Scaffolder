@@ -18,7 +18,7 @@ RUN apk add --no-cache \
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.8.6 /usr/bin/composer /usr/bin/composer
 
 RUN adduser -D -u $uid -h /home/$user $user \
     && addgroup $user www-data \
@@ -32,3 +32,5 @@ COPY php.ini /usr/local/etc/php/php.ini
 WORKDIR /var/www/api
 
 USER $user
+
+RUN git config --global --add safe.directory /var/www/api
