@@ -30,10 +30,10 @@ class RouteServiceProvider extends ServiceProvider {
     /**
      * Привязка роута HOME к env.
      *
-     * @return string
+     * @return mixed
      */
-    protected static function getHome(): string {
-        return env('APP_HOME', '/');
+    protected static function getHome(): mixed {
+        return config('app.home', '/');
     }
 
     /**
@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider {
         RateLimiter::for('api', function ($request) {
             $userId = $request->user() ? $request->user()->id : null;
 
-            return Limit::perMinute(100)->by($userId ?? $request->ip());
+            return Limit::perMinute(200)->by($userId ?? $request->ip());
         });
     }
 }
