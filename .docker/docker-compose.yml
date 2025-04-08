@@ -59,7 +59,7 @@ services:
         php-fpm
       "
 
-  lara-scheduler:
+  scheduler:
     build:
       context: php/cron/
       dockerfile: Dockerfile
