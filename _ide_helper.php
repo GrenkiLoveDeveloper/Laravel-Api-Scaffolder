@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 12.7.2.
+ * Generated for Laravel 12.10.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1232,15 +1232,8 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Returns true if the container can return an entry for the given identifier.
          * 
-         * Returns false otherwise.
-         * 
-         * `has($id)` returning true does not mean that `get($id)` will not throw an exception.
-         * It does however mean that `get($id)` will not throw a `NotFoundExceptionInterface`.
          *
-         * @return bool 
-         * @param string $id Identifier of the entry to look for.
          * @return bool 
          * @static 
          */
@@ -4375,6 +4368,19 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
+         * Get a memoized cache driver instance.
+         *
+         * @param string|null $driver
+         * @return \Illuminate\Contracts\Cache\Repository 
+         * @static 
+         */
+        public static function memo($driver = null)
+        {
+            /** @var \Illuminate\Cache\CacheManager $instance */
+            return $instance->memo($driver);
+        }
+
+        /**
          * Resolve the given store.
          *
          * @param string $name
@@ -4562,15 +4568,9 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Obtains multiple cache items by their unique keys.
+         * 
          *
          * @return iterable 
-         * @param iterable<string> $keys A list of keys that can be obtained in a single operation.
-         * @param mixed $default Default value to return for keys that do not exist.
-         * @return iterable<string, mixed> A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
-         * @throws \Psr\SimpleCache\InvalidArgumentException
-         *   MUST be thrown if $keys is neither an array nor a Traversable,
-         *   or if any of the $keys are not a legal value.
          * @static 
          */
         public static function getMultiple($keys, $default = null)
@@ -4609,17 +4609,9 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Persists data in the cache, uniquely referenced by a key with an optional expiration TTL time.
+         * 
          *
          * @return bool 
-         * @param string $key The key of the item to store.
-         * @param mixed $value The value of the item to store, must be serializable.
-         * @param null|int|\DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
-         *                                      the driver supports TTL then the library may set a default value
-         *                                      for it or let the driver take care of that.
-         * @return bool True on success and false on failure.
-         * @throws \Psr\SimpleCache\InvalidArgumentException
-         *   MUST be thrown if the $key string is not a legal value.
          * @static 
          */
         public static function set($key, $value, $ttl = null)
@@ -4643,17 +4635,9 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Persists a set of key => value pairs in the cache, with an optional TTL.
+         * 
          *
          * @return bool 
-         * @param iterable $values A list of key => value pairs for a multiple-set operation.
-         * @param null|int|\DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
-         *                                       the driver supports TTL then the library may set a default value
-         *                                       for it or let the driver take care of that.
-         * @return bool True on success and false on failure.
-         * @throws \Psr\SimpleCache\InvalidArgumentException
-         *   MUST be thrown if $values is neither an array nor a Traversable,
-         *   or if any of the $values are not a legal value.
          * @static 
          */
         public static function setMultiple($values, $ttl = null)
@@ -4796,13 +4780,9 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Delete an item from the cache by its unique key.
+         * 
          *
          * @return bool 
-         * @param string $key The unique cache key of the item to delete.
-         * @return bool True if the item was successfully removed. False if there was an error.
-         * @throws \Psr\SimpleCache\InvalidArgumentException
-         *   MUST be thrown if the $key string is not a legal value.
          * @static 
          */
         public static function delete($key)
@@ -4812,14 +4792,9 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Deletes multiple cache items in a single operation.
+         * 
          *
          * @return bool 
-         * @param iterable<string> $keys A list of string-based keys to be deleted.
-         * @return bool True if the items were successfully removed. False if there was an error.
-         * @throws \Psr\SimpleCache\InvalidArgumentException
-         *   MUST be thrown if $keys is neither an array nor a Traversable,
-         *   or if any of the $keys are not a legal value.
          * @static 
          */
         public static function deleteMultiple($keys)
@@ -4829,10 +4804,9 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Wipes clean the entire cache's keys.
+         * 
          *
          * @return bool 
-         * @return bool True on success and false on failure.
          * @static 
          */
         public static function clear()
@@ -10085,9 +10059,9 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\Client\RequestException 
          * @static 
          */
-        public static function requestException($body = null, $status = 200, $headers = [])
+        public static function failedRequest($body = null, $status = 200, $headers = [])
         {
-            return \Illuminate\Http\Client\Factory::requestException($body, $status, $headers);
+            return \Illuminate\Http\Client\Factory::failedRequest($body, $status, $headers);
         }
 
         /**
@@ -13202,7 +13176,7 @@ namespace Illuminate\Support\Facades {
          * @param string $key
          * @param int $maxAttempts
          * @param \Closure $callback
-         * @param int $decaySeconds
+         * @param \DateTimeInterface|\DateInterval|int $decaySeconds
          * @return mixed 
          * @static 
          */
@@ -13230,7 +13204,7 @@ namespace Illuminate\Support\Facades {
          * Increment (by 1) the counter for a given key for a given decay time.
          *
          * @param string $key
-         * @param int $decaySeconds
+         * @param \DateTimeInterface|\DateInterval|int $decaySeconds
          * @return int 
          * @static 
          */
@@ -13244,7 +13218,7 @@ namespace Illuminate\Support\Facades {
          * Increment the counter for a given key for a given decay time by a given amount.
          *
          * @param string $key
-         * @param int $decaySeconds
+         * @param \DateTimeInterface|\DateInterval|int $decaySeconds
          * @param int $amount
          * @return int 
          * @static 
@@ -13259,7 +13233,7 @@ namespace Illuminate\Support\Facades {
          * Decrement the counter for a given key for a given decay time by a given amount.
          *
          * @param string $key
-         * @param int $decaySeconds
+         * @param \DateTimeInterface|\DateInterval|int $decaySeconds
          * @param int $amount
          * @return int 
          * @static 
@@ -15711,7 +15685,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get an array of all of the files on the request.
          *
-         * @return array<int, \Illuminate\Http\UploadedFile|\Illuminate\Http\UploadedFile[]> 
+         * @return array<string, \Illuminate\Http\UploadedFile|\Illuminate\Http\UploadedFile[]> 
          * @static 
          */
         public static function allFiles()
@@ -15738,7 +15712,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string|null $key
          * @param mixed $default
-         * @return ($key is null ? array<int, \Illuminate\Http\UploadedFile|\Illuminate\Http\UploadedFile[]> : \Illuminate\Http\UploadedFile|\Illuminate\Http\UploadedFile[]|null)
+         * @return ($key is null ? array<string, \Illuminate\Http\UploadedFile|\Illuminate\Http\UploadedFile[]> : \Illuminate\Http\UploadedFile|\Illuminate\Http\UploadedFile[]|null)
          * @static 
          */
         public static function file($key = null, $default = null)
@@ -17975,7 +17949,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the schemas that belong to the connection.
          *
-         * @return array 
+         * @return \Illuminate\Database\Schema\list<array{name: string, path: string|null, default: bool}>
          * @static 
          */
         public static function getSchemas()
@@ -18017,7 +17991,7 @@ namespace Illuminate\Support\Facades {
          * Get the tables that belong to the connection.
          *
          * @param string|string[]|null $schema
-         * @return array 
+         * @return \Illuminate\Database\Schema\list<array{name: string, schema: string|null, schema_qualified_name: string, size: int|null, comment: string|null, collation: string|null, engine: string|null}>
          * @static 
          */
         public static function getTables($schema = null)
@@ -18032,7 +18006,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string|string[]|null $schema
          * @param bool $schemaQualified
-         * @return array 
+         * @return list<string> 
          * @static 
          */
         public static function getTableListing($schema = null, $schemaQualified = true)
@@ -18046,7 +18020,7 @@ namespace Illuminate\Support\Facades {
          * Get the views that belong to the connection.
          *
          * @param string|string[]|null $schema
-         * @return array 
+         * @return \Illuminate\Database\Schema\list<array{name: string, schema: string|null, schema_qualified_name: string, definition: string}>
          * @static 
          */
         public static function getViews($schema = null)
@@ -18060,7 +18034,7 @@ namespace Illuminate\Support\Facades {
          * Get the user-defined types that belong to the connection.
          *
          * @param string|string[]|null $schema
-         * @return array 
+         * @return \Illuminate\Database\Schema\list<array{name: string, schema: string, type: string, type: string, category: string, implicit: bool}>
          * @static 
          */
         public static function getTypes($schema = null)
@@ -18089,7 +18063,7 @@ namespace Illuminate\Support\Facades {
          * Determine if the given table has given columns.
          *
          * @param string $table
-         * @param array $columns
+         * @param array<string> $columns
          * @return bool 
          * @static 
          */
@@ -18152,7 +18126,7 @@ namespace Illuminate\Support\Facades {
          * Get the column listing for a given table.
          *
          * @param string $table
-         * @return array 
+         * @return list<string> 
          * @static 
          */
         public static function getColumnListing($table)
@@ -18166,7 +18140,7 @@ namespace Illuminate\Support\Facades {
          * Get the columns for a given table.
          *
          * @param string $table
-         * @return array 
+         * @return \Illuminate\Database\Schema\list<array{name: string, type: string, type_name: string, nullable: bool, default: mixed, auto_increment: bool, comment: string|null, generation: array{type: string, expression: string|null}|null}>
          * @static 
          */
         public static function getColumns($table)
@@ -18180,7 +18154,7 @@ namespace Illuminate\Support\Facades {
          * Get the indexes for a given table.
          *
          * @param string $table
-         * @return array 
+         * @return \Illuminate\Database\Schema\list<array{name: string, columns: list<string>, type: string, unique: bool, primary: bool}>
          * @static 
          */
         public static function getIndexes($table)
@@ -18194,7 +18168,7 @@ namespace Illuminate\Support\Facades {
          * Get the names of the indexes for a given table.
          *
          * @param string $table
-         * @return array 
+         * @return list<string> 
          * @static 
          */
         public static function getIndexListing($table)
@@ -18296,7 +18270,7 @@ namespace Illuminate\Support\Facades {
          * Drop columns from a table schema.
          *
          * @param string $table
-         * @param string|array $columns
+         * @param string|array<string> $columns
          * @return void 
          * @static 
          */

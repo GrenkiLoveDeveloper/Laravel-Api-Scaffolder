@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -11,7 +13,7 @@ return [
     | that are given by the password broker for a password update attempt
     | outcome such as failure due to an invalid password / reset token.
     |
-    */
+     */
 
     'reset' => 'Your password has been reset.',
     'sent' => 'We have emailed your password reset link.',

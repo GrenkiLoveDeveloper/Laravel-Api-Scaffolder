@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider {
      * Bootstrap any application services.
      */
     public function boot(): void {
-        Model::preventLazyLoading( ! app()->isProduction());
-        Model::shouldBeStrict( ! app()->isProduction());
+        Model::preventLazyLoading(! app()->isProduction());
+        Model::shouldBeStrict(! app()->isProduction());
 
         if (config('app.env') !== 'local') {
             URL::forceScheme('https');
