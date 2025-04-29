@@ -177,6 +177,7 @@ return [
      */
 
     'custom' => [
+        'duplicate' => 'The $attribute must not contain duplicate',
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
