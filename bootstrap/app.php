@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -28,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     [
                         'error' => __('messages.model_not_found', ['model' => $e->getModel()]),
                     ],
-                    JsonResponse::HTTP_NOT_FOUND
+                    Response::HTTP_NOT_FOUND
                 );
             }
         });
