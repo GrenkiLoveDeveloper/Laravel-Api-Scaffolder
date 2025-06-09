@@ -11,3 +11,6 @@ parameters:
         - _ide_helper.php
     level: 9
     inferPrivatePropertyTypeFromConstructor: true
+    ignoreErrors:
+        - '#Class PHP_CodeSniffer\\Standards\\.*\\Sniffs\\.* not found#'
+

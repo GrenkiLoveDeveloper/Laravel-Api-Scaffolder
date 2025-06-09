@@ -7,7 +7,7 @@ namespace App\Abstracts\DTO;
 use ReflectionClass;
 use RuntimeException;
 
-abstract class BaseDTOAbstract {
+abstract class BaseDTO {
     /**
      * Создание DTO из массива с учетом типов.
      *
