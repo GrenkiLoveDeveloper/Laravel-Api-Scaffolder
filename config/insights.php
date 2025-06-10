@@ -8,18 +8,13 @@ use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
-use PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\OpeningBraceSameLineSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
-use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff;
-use PHP_CodeSniffer\Standards\PEAR\Sniffs\Classes\ClassDeclarationSniff;
-use PHP_CodeSniffer\Standards\PEAR\Sniffs\ControlStructures\ControlSignatureSniff;
-use PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\FunctionDeclarationSniff;
 use PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ScopeClosingBraceSniff;
-use PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ClassFileNameSniff;
-use PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\MultiLineFunctionDeclarationSniff;
-use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
+use PhpCsFixer\Fixer\Basic\BracesFixer;
+use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
 use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
@@ -78,6 +73,8 @@ return [
 
     'exclude' => [
         'database/*',
+        'vendor',
+        'storage',
     ],
 
     'add' => [
@@ -98,28 +95,20 @@ return [
         ReturnTypeHintSniff::class,
         UselessFunctionDocCommentSniff::class,
         DocCommentSpacingSniff::class,
-        LineLengthSniff::class,
-        MultiLineFunctionDeclarationSniff::class,
         ScopeClosingBraceSniff::class,
-        DisallowMultipleStatementsSniff::class,
         AlphabeticallySortedUsesSniff::class,
         DeclareStrictTypesSniff::class,
         DisallowMixedTypeHintSniff::class,
-        SuperfluousWhitespaceSniff::class,
-        ClassFileNameSniff::class,
         UnusedUsesSniff::class,
-        ControlSignatureSniff::class,
+        DisallowEmptySniff::class,
+        ClassDefinitionFixer::class,
+        BracesFixer::class,
     ],
 
     'config' => [
-        OpeningBraceSameLineSniff::class => [
-            'position' => 'same',
-        ],
-        ClassDeclarationSniff::class => [
-            'allowSingleLine' => true,
-        ],
-        FunctionDeclarationSniff::class => [
-            'allowSingleLine' => true,
+        LineLengthSniff::class => [
+            'lineLimit' => 120,
+            'absoluteLineLimit' => 160,
         ],
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
