@@ -2,7 +2,14 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
+use Rector\CodingStyle\Rector\ClassMethod\MakeInheritedMethodVisibilitySameAsParentRector;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
+use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
+use Rector\Php81\Rector\Array_\FirstClassCallableRector;
+use Rector\Php84\Rector\Param\ExplicitNullableParamTypeRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use RectorLaravel\Set\LaravelLevelSetList;
@@ -19,9 +26,14 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/vendor',
         __DIR__ . '/storage',
         __DIR__ . '/tests',
+        __DIR__ . '/app/Providers/TelescopeServiceProvider.php',
+        __DIR__ . '/config/ide-helper.php',
 
-        Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector::class,
-        Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector::class,
+        ExplicitBoolCompareRector::class,
+        FirstClassCallableRector::class,
+        RemoveUselessVarTagRector::class,
+        RemoveUselessParamTagRector::class,
+        RemoveUselessReturnTagRector::class,
     ]);
 
     $rectorConfig->sets([
@@ -33,5 +45,8 @@ return static function (RectorConfig $rectorConfig): void {
         LaravelLevelSetList::UP_TO_LARAVEL_120,
     ]);
 
-    $rectorConfig->rule(Rector\CodingStyle\Rector\ClassMethod\MakeInheritedMethodVisibilitySameAsParentRector::class);
+    $rectorConfig->rules([
+        ExplicitNullableParamTypeRector::class,
+        MakeInheritedMethodVisibilitySameAsParentRector::class,
+    ]);
 };
